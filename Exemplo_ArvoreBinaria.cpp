@@ -427,7 +427,11 @@ ARVORE* busca_recursivo( ARVORE *p, int cod ){
             return busca_recursivo( p->sube, cod ); // anda com o ponteiro p para a esquerda, pois o código procurada é menor
        else
             return busca_recursivo( p->subd, cod ); // anda com o ponteiro p para a direita, pois o código procurada é maior 
-   } // fim if( *p == NULL || (*p)->info.codigo == cod )
+   } 
+   
+    if( *p == NULL || (*p)->info.codigo == cod ){
+    	printf("achou!!!");
+	}
 }
 
 

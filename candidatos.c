@@ -89,7 +89,7 @@ int busca( int cod, ARVORE** a, ARVORE** p ){
            if ( (*p)->info.codigo == cod ){
 		   		// veririfica se encontrou o código
                 achou = TRUE;        // encontrou a matricula na estrutura
-                printf("Seu candidato tem o codigo : %d", (*p)->info.codigo);
+
 		   } 
            else {
                 *a = *p;             // posiciona ponteiro auxiliar no anterior de p
@@ -103,6 +103,18 @@ int busca( int cod, ARVORE** a, ARVORE** p ){
 }
 
 
+ARVORE* busca_recursivo( ARVORE *p, int cod ){
+//	if( p == NULL || p->info.codigo == cod )
+   if(p->info.codigo == cod )
+       	printf("achou!!!");
+   else{
+       if( p->info.codigo > cod )
+            return busca_recursivo( p->sube, cod ); // anda com o ponteiro p para a esquerda, pois o código procurada é menor
+       else
+            return busca_recursivo( p->subd, cod ); // anda com o ponteiro p para a direita, pois o código procurada é maior 
+   } 
+   
+}
 
 
 
@@ -111,18 +123,72 @@ int busca( int cod, ARVORE** a, ARVORE** p ){
 
 int main(int argc, char *argv[]) {
 	
-	
+	char op;      
 	setlocale(LC_ALL, "Portuguese");
 	//Resultado das questões
 	int pontos = 25;
 	
 	//Cria árvore
 	ARVORE* r, *p; 
-	cria_ARVORE( &r );
-	insere( &r );
-	insere( &r );  
-	insere( &r );      
-	busca(666, &r, &p);
+//	cria_ARVORE( &r );
+//	insere( &r );
+//	insere( &r );  
+//	insere( &r );      
+//	busca_recursivo(r, 666);
+//	
+	while(1){
+		 printf( "\n /-----------------------------------------------------/" ); 
+         printf( "\n Programa de advinhar candidato - Menu                " );
+         printf( "\n [1] Cria ARVORE                                      " );
+         printf( "\n [2] Insere candidato                                 " );
+         printf( "\n [3] Remove candidato                                 " );
+         printf( "\n [4] Imprime ARVORE de candidatos                     " );
+		 printf( "\n [5] Descubra seu candidato                           " );          
+		 printf( "\n [6] Para sair do programa                            " );         
+         printf( "\n /---------------------------------------------------/" );      
+         printf( "\n Opcao: " );
+         
+         op = getche(); // tecla de opção do menu
+         
+          switch( op ) {
+           case '1':   // rotina cria ARVORE       
+                   cria_ARVORE( &r );
+                   break;
+                                
+           case '2':   // rotina inclui nodo no final da ARVORE (folha)
+                   insere( &r );    
+                   break;
+                      
+           case '3':   // rotina exclui nodo da ARVORE
+                 
+                   break;
+           
+           case '4':   // rotina imprime nodos da ARVORE
+                  
+                   break;                   
+                                                         
+           case '5':   // rotina recursiva do inclui nodo da ARVORE
+                    break;  
+                   
+           case '6':  // rotina recursiva que busca um registro da ARVORE                                                
+                  
+                   break; 
+				                      
+           case '7':  // término do programa                                                 
+                   exit( 1 ); 
+                   break;                
+                   
+           default : 
+                   printf( "\n Digite uma opcao: " );
+                   break;
+        } 
+        
+        
+        fflush( stdin ); // limpa buffer do teclado, funciona junto com entrada de dados
+        getchar();       // parada da tela
+        
+        printf( "\n" );
+	}
 	
 	
 	
