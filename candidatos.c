@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>    // setlocale
-
+#define MAXCHAR 1000
 #define FALSE   0      // constante falsa
 #define TRUE   !FALSE  // constante verdadeira
 
@@ -22,6 +22,20 @@ typedef struct arv {
        struct arv* subd;  // ponteiro para o nodo da direita
        struct arv* sube;  // ponteiro para o nodo da esquerda
 } ARVORE; 
+
+
+/***********************************************/ 
+/* Definição das Funções                       */
+/***********************************************/
+void    entrada_dados   ( ARVORE* aux ); // leitura dos dados de entrada
+void    imprime_ARVORE  ( ARVORE* aux ); // visualização da árvore em tela, todos os candidatos
+void    cria_ARVORE     ( ARVORE** r );  // inicializa árvore com NULL
+void    insere_candidato( ARVORE** r, int cod ); // inclui um novo candidato na árvore
+ARVORE* remove_candidato( ARVORE *p, int cod ); //remove candidato
+ARVORE* busca_recursivo ( ARVORE *p, int cod ); // buscar um candidato
+ARVORE* descubra_candidato ( ARVORE *p, int cod ); // descubra o  candidato
+void 	carregar_questoes (char filename);
+void    salvar_questao   ( ARVORE* p );
 
 
 void cria_ARVORE( ARVORE** r ){
@@ -136,64 +150,79 @@ int main(int argc, char *argv[]) {
 //	insere( &r );      
 //	busca_recursivo(r, 666);
 //	
-	while(1){
-		 printf( "\n /-----------------------------------------------------/" ); 
-         printf( "\n Programa de advinhar candidato - Menu                " );
-         printf( "\n [1] Cria ARVORE                                      " );
-         printf( "\n [2] Insere candidato                                 " );
-         printf( "\n [3] Remove candidato                                 " );
-         printf( "\n [4] Imprime ARVORE de candidatos                     " );
-		 printf( "\n [5] Descubra seu candidato                           " );          
-		 printf( "\n [6] Para sair do programa                            " );         
-         printf( "\n /---------------------------------------------------/" );      
-         printf( "\n Opcao: " );
-         
-         op = getche(); // tecla de opção do menu
-         
-          switch( op ) {
-           case '1':   // rotina cria ARVORE       
-                   cria_ARVORE( &r );
-                   break;
-                                
-           case '2':   // rotina inclui nodo no final da ARVORE (folha)
-                   insere( &r );    
-                   break;
-                      
-           case '3':   // rotina exclui nodo da ARVORE
-                 
-                   break;
-           
-           case '4':   // rotina imprime nodos da ARVORE
-                  
-                   break;                   
-                                                         
-           case '5':   // rotina recursiva do inclui nodo da ARVORE
-                    break;  
-                   
-           case '6':  // rotina recursiva que busca um registro da ARVORE                                                
-                  
-                   break; 
-				                      
-           case '7':  // término do programa                                                 
-                   exit( 1 ); 
-                   break;                
-                   
-           default : 
-                   printf( "\n Digite uma opcao: " );
-                   break;
-        } 
-        
-        
-        fflush( stdin ); // limpa buffer do teclado, funciona junto com entrada de dados
-        getchar();       // parada da tela
-        
-        printf( "\n" );
-	}
+//	while(1){
+//		 printf( "\n /-----------------------------------------------------/" ); 
+//         printf( "\n Programa de advinhar candidato - Menu                " );
+//         printf( "\n [1] Cria ARVORE                                      " );
+//         printf( "\n [2] Insere candidato                                 " );
+//         printf( "\n [3] Remove candidato                                 " );
+//         printf( "\n [4] Imprime ARVORE de candidatos                     " );
+//		 printf( "\n [5] Descubra seu candidato                           " );          
+//		 printf( "\n [6] Para sair do programa                            " );         
+//         printf( "\n /---------------------------------------------------/" );      
+//         printf( "\n Opcao: " );
+//         
+//         op = getche(); // tecla de opção do menu
+//         
+//          switch( op ) {
+//           case '1':    
+//                   cria_ARVORE( &r );
+//                   break;
+//                                
+//           case '2':   
+//                   insere( &r );    
+//                   break;
+//                      
+//           case '3':   
+//                 
+//                   break;
+//           
+//           case '4':   
+//                  
+//                   break;                   
+//                                                         
+//           case '5':   
+//                    break;  
+//                   
+//           case '6':                                               
+//                  
+//                   break; 
+//				                      
+//           case '7':                                              
+//                   exit( 1 ); 
+//                   break;                
+//                   
+//           default : 
+//                   printf( "\n Digite uma opcao: " );
+//                   break;
+//        } 
+//        
+//        
+//        fflush( stdin ); // limpa buffer do teclado, funciona junto com entrada de dados
+//        getchar();       // parada da tela
+//        
+//        printf( "\n" );
+//	}
+//	
+//	
 	
-	
-	
-	
-	
+
+    
+    
+    
+    FILE *fp;
+    char str[MAXCHAR];
+    char* filename = "demon.txt";
+ 
+    fp = fopen(filename, "r");
+    if (fp == NULL){
+        printf("Could not open file %s",filename);
+        return 1;
+    }
+    while (fgets(str, MAXCHAR, fp) != NULL)
+        printf("%s", str);
+    fclose(fp);
+
 	
 	
 	
