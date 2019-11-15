@@ -97,6 +97,9 @@ void insere( ARVORE** r ){
 
 int busca( int cod, ARVORE** a, ARVORE** p ){
    int achou = FALSE;                // achou = indica se encontrou o código na estrutura
+   	char str[] = "strtok needs to be called several times to split a string";
+	int init_size = strlen(str);
+	char delim[] = ";";
    
    *a = NULL;                        // ponteiro auxiliar para o anterior
    while( ( *p != NULL ) && ( !achou ) )
@@ -137,10 +140,11 @@ ARVORE* busca_recursivo( ARVORE *p, int cod ){
 
 int main(int argc, char *argv[]) {
 	
+	char delim[] = ";";
 	char op;      
 	setlocale(LC_ALL, "Portuguese");
 	//Resultado das questões
-	int pontos = 25;
+	int pontos = 25, i =0;
 	
 	//Cria árvore
 	ARVORE* r, *p; 
@@ -219,8 +223,20 @@ int main(int argc, char *argv[]) {
         printf("Could not open file %s",filename);
         return 1;
     }
-    while (fgets(str, MAXCHAR, fp) != NULL)
-        printf("%s", str);
+    while (fgets(str, MAXCHAR, fp) != NULL){
+    	char *ptr = strtok(str, delim);
+
+	while(ptr != NULL)
+	{
+		printf("'%s'\n", ptr);
+		ptr = strtok(NULL, delim);
+	}
+	int init_size = strlen(str);
+	/* This loop will show that there are zeroes in the str after tokenizing */
+	
+	printf("\n");
+	}
+        
     fclose(fp);
 
 	
